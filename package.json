@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.ts",
   "license": "MIT",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
@@ -13,7 +16,8 @@
     "start": "cross-env NODE_ENV=production ts-node src/index.ts",
     "build": "tsc",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
-    "heroku-postbuild": "cd src/client && yarn install && yarn build"
+    "heroku-postbuild": "cd src/client && yarn install && yarn build",
+    "deploy": "git add . && git commit -m Heroku && git push && git push heroku && heroku logs --tail --remote heroku"
   },
   "jest": {
     "preset": "ts-jest",
@@ -119,5 +123,8 @@
     "webpack-dev-middleware": "^5.0.0",
     "webpack-dev-server": "^3.11.2",
     "worker-loader": "^3.0.8"
-  }
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ]
 }
